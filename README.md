@@ -7,6 +7,9 @@ EZ A FÁJL: a projekt leírása – mit csinál, hogyan kell telepíteni és fut
 
 Egyszerű, a saját gépeden futó webes felület a nemmegfelelőségek elemzéséhez.
 
+> 🌐 **Kipróbálás telepítés nélkül (kitalált adatokkal):** https://minosegugyi-dashboard.streamlit.app
+> A saját adataiddal töltsd le a programot, és a saját gépeden futtasd – lásd [Kipróbálás a saját adataiddal](#kipróbálás-a-saját-adataiddal).
+
 ## Mit csinál?
 
 Négy fül (nézet) van benne:
