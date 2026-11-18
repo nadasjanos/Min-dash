@@ -1,0 +1,9 @@
+# requirements.txt – a program által használt Python-csomagok listája.
+# Telepítés:  pip install -r requirements.txt
+streamlit>=1.50
+pandas>=2.0
+numpy>=1.26
+plotly>=5.18
+openpyxl>=3.1
+matplotlib>=3.8
+python-pptx>=1.0
