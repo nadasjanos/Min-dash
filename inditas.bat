@@ -79,7 +79,7 @@ echo.
 echo A dashboard indul, a bongeszo magatol megnyilik.
 echo Leallitashoz zard be ezt az ablakot.
 echo.
-"%VENV_PY%" -m streamlit run app.py
+"%VENV_PY%" -m streamlit run app.py --server.address localhost
 goto vege
 
 :nincs_winget

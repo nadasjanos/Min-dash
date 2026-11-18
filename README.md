@@ -41,7 +41,7 @@ Ha a szűrők a gombnyomás után változnak, az app jelzi, hogy a beszámolót 
 - **Alapból a szintetikus (kitalált) adatot** használja: `data/synthetic/`.
 - **Valós adat**: a `data/real/` mappába másold az Excel-fájlt. Ezt az app **csak akkor** olvassa, ha az oldalsávban bekapcsolod a *„Valós adat használata”* kapcsolót.
 - A `data/real/` mappa és az AI-napló benne van a `.gitignore`-ban, így Gittel sem kerülhet fel sehova.
-- A program semmit nem tölt fel az internetre. A Streamlit használati statisztika-küldése ki van kapcsolva (`.streamlit/config.toml`), és az app csak a saját gépedről érhető el (`localhost`).
+- A program semmit nem tölt fel az internetre. A Streamlit használati statisztika-küldése ki van kapcsolva (`.streamlit/config.toml`), és az `inditas.bat` úgy indítja, hogy csak a saját gépedről legyen elérhető (`localhost`).
 
 ### Valós Excel oszlopai
 
@@ -161,8 +161,10 @@ python generate_data.py
 2. A dashboard indítása:
 
 ```bash
-streamlit run app.py
+streamlit run app.py --server.address localhost
 ```
+
+   (A `--server.address localhost` miatt csak a saját gépedről érhető el.)
 
 A böngészőben megnyílik a `http://localhost:8501` cím. Leállítás: a terminálban **Ctrl+C**.
 
@@ -180,5 +182,5 @@ A böngészőben megnyílik a `http://localhost:8501` cím. Leállítás: a term
 | `minta/` | Kitöltési minta: `NMF_minta.xlsx` és `gyartott_mennyiseg.csv`. |
 | `github_csomag.py` | Feltöltésre kész mappát készít (`github_csomag/`), valós adat nélkül. |
 | `requirements.txt` | A szükséges Python-csomagok. |
-| `.streamlit/config.toml` | Streamlit-beállítások (nincs statisztika-küldés, csak localhost). |
+| `.streamlit/config.toml` | Streamlit-beállítások (nincs statisztika-küldés). |
 | `.gitignore` | Amit a Git soha ne vegyen fel (valós adat, AI-napló). |

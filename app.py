@@ -15,6 +15,7 @@
 # adatot csak az oldalsávban lévő kapcsolóval lehet bekapcsolni.
 # -----------------------------------------------------------------------------
 
+import os
 from datetime import date
 from pathlib import Path
 
@@ -36,7 +37,14 @@ NM_FAJL = "nemmegfelelosegek.csv"          # nemmegfelelőségek listája
 MENNYISEG_FAJL = "gyartott_mennyiseg.csv"  # havi gyártott darabszám
 AI_NAPLO_FAJL = ALAP_MAPPA / "ai_naplo.csv"  # az AI-ellenőrzési napló (helyi fájl)
 
-KOTELEZO_OSZLOPOK = ["dátum", "hibatípus", "ok", "termékcsalád", "költség", "státusz"]
+# Online bemutató mód (Streamlit Community Cloud): ott nincs valós adat, és az
+# AI-naplót sem írjuk közös fájlba, mert azt minden látogató látná.
+# A Community Cloud a repót a /mount/src/ mappába teszi – erről ismerjük fel.
+# Helyben is bekapcsolható: MINOSEG_DEMO=1 környezeti változóval.
+DEMO = (os.environ.get("MINOSEG_DEMO") == "1"
+        or Path(__file__).resolve().as_posix().startswith("/mount/src/"))
+
+KOTELEZO_OSZLOPOK =["dátum", "hibatípus", "ok", "termékcsalád", "költség", "státusz"]
 AI_NAPLO_OSZLOPOK = ["dátum", "AI eszköz", "feladat / AI kimenet", "ellenőrzött szempontok",
                      "eredmény", "megjegyzés"]
 
@@ -77,7 +85,10 @@ def adat_betoltes(mappa: Path, valos_fajl: Path | None = None, verzio: float = 0
 
 
 def ai_naplo_betoltes() -> pd.DataFrame:
-    """Beolvassa az AI-ellenőrzési naplót; ha még nincs, üres táblát ad."""
+    """Beolvassa az AI-ellenőrzési naplót; ha még nincs, üres táblát ad.
+    Online bemutatóban csak a látogató saját böngészőmenetében él (nem fájlban)."""
+    if DEMO:
+        return st.session_state.get("ai_naplo", pd.DataFrame(columns=AI_NAPLO_OSZLOPOK))
     if AI_NAPLO_FAJL.exists():
         return pd.read_csv(AI_NAPLO_FAJL, encoding="utf-8-sig")
     return pd.DataFrame(columns=AI_NAPLO_OSZLOPOK)
@@ -85,11 +96,18 @@ def ai_naplo_betoltes() -> pd.DataFrame:
 
 # --- Oldalsáv: adatforrás és szűrők ------------------------------------------
 st.sidebar.header("Beállítások")
-valos_adat_kell = st.sidebar.toggle(
-    "Valós adat használata (data/real/)",
-    value=False,  # alapból KI van kapcsolva -> szintetikus adat
-    help="Kikapcsolva a kitalált (szintetikus) adatot látod.",
-)
+if DEMO:
+    # Online bemutató: csak a kitalált adat, saját adathoz le kell tölteni
+    valos_adat_kell = False
+    st.sidebar.info("🌐 **Online bemutató** kitalált adatokkal. A saját adataiddal "
+                    "a programot töltsd le, és a saját gépeden futtasd: "
+                    "[GitHub – Min-dash](https://github.com/nadasjanos/Min-dash)")
+else:
+    valos_adat_kell = st.sidebar.toggle(
+        "Valós adat használata (data/real/)",
+        value=False,  # alapból KI van kapcsolva -> szintetikus adat
+        help="Kikapcsolva a kitalált (szintetikus) adatot látod.",
+    )
 mappa = VALOS_MAPPA if valos_adat_kell else SZINTETIKUS_MAPPA
 
 valos_fajl = None
@@ -421,9 +439,15 @@ with tab_p:
 
 # --- 4) AI-ellenőrzési napló -------------------------------------------------
 with tab_ai:
-    st.write("Itt rögzítheted, mit ellenőriztél kézzel egy AI által adott kimeneten. "
-             f"A bejegyzések helyben, a `{AI_NAPLO_FAJL.relative_to(Path(__file__).parent)}` "
-             "fájlba mentődnek.")
+    if DEMO:
+        st.write("Itt rögzítheted, mit ellenőriztél kézzel egy AI által adott kimeneten. "
+                 "**Online bemutató:** a bejegyzések csak a te böngészőablakodban "
+                 "látszanak, és az oldal bezárásakor törlődnek – mások nem látják. "
+                 "Megtartáshoz használd a „Napló letöltése” gombot.")
+    else:
+        st.write("Itt rögzítheted, mit ellenőriztél kézzel egy AI által adott kimeneten. "
+                 f"A bejegyzések helyben, a `{AI_NAPLO_FAJL.relative_to(Path(__file__).parent)}` "
+                 "fájlba mentődnek.")
 
     # A st.form miatt csak a "Mentés" gombra kattintva fut le a mentés
     with st.form("ai_naplo_urlap", clear_on_submit=True):
@@ -457,8 +481,11 @@ with tab_ai:
                 "megjegyzés": megjegyzes,
             }])
             naplo = pd.concat([ai_naplo_betoltes(), uj_sor], ignore_index=True)
-            AI_NAPLO_FAJL.parent.mkdir(parents=True, exist_ok=True)
-            naplo.to_csv(AI_NAPLO_FAJL, index=False, encoding="utf-8-sig")
+            if DEMO:
+                st.session_state["ai_naplo"] = naplo  # csak ebben a böngészőmenetben
+            else:
+                AI_NAPLO_FAJL.parent.mkdir(parents=True, exist_ok=True)
+                naplo.to_csv(AI_NAPLO_FAJL, index=False, encoding="utf-8-sig")
             st.success("Bejegyzés elmentve.")
 
     naplo = ai_naplo_betoltes()
