@@ -1,0 +1,27 @@
+# .gitignore
+# EZ A FÁJL: megmondja a Gitnek, mely fájlokat SOHA ne vegye verziókezelésbe
+# (így véletlenül sem kerülnek fel pl. GitHubra).
+
+# Valós (bizalmas) adat – soha nem kerülhet fel sehova!
+data/real/
+
+# Vállalatirányítási exportok, ha véletlenül a data/real/ mappán kívül maradnak
+TermelesBeerkezes*
+*.Html
+*.html
+*.xlt
+
+# A github_csomag.py által készített feltöltési mappa (annak tartalma megy fel)
+github_csomag/
+
+# Az AI-ellenőrzési napló is helyi, személyes munkafájl
+data/ai_naplo.csv
+
+# Excel ideiglenes zárolófájljai
+~$*
+
+# Python ideiglenes / telepítési fájlok
+__pycache__/
+*.pyc
+.venv/
+venv/
