@@ -1,0 +1,12 @@
+# .streamlit/config.toml
+# EZ A FÁJL: a Streamlit beállításai.
+# - gatherUsageStats = false: a Streamlit ne küldjön használati statisztikát
+#   az internetre (alapból küldene!).
+# - address = "localhost": az app csak a saját gépedről érhető el,
+#   a hálózat többi gépéről nem.
+
+[browser]
+gatherUsageStats = false
+
+[server]
+address = "localhost"
