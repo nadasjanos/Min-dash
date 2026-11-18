@@ -2,11 +2,9 @@
 # EZ A FÁJL: a Streamlit beállításai.
 # - gatherUsageStats = false: a Streamlit ne küldjön használati statisztikát
 #   az internetre (alapból küldene!).
-# - address = "localhost": az app csak a saját gépedről érhető el,
-#   a hálózat többi gépéről nem.
+# Azt, hogy az app csak a saját gépedről legyen elérhető (localhost), az
+# inditas.bat állítja be (--server.address localhost). Itt azért nincs, mert
+# az online bemutató (Streamlit Community Cloud) ezzel a beállítással nem indulna.
 
 [browser]
 gatherUsageStats = false
-
-[server]
-address = "localhost"
