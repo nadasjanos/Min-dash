@@ -9,6 +9,10 @@ Egyszerű, a saját gépeden futó webes felület a nemmegfelelőségek elemzés
 
 > 🌐 **Kipróbálás telepítés nélkül (kitalált adatokkal):** https://minosegugyi-dashboard.streamlit.app
 > A saját adataiddal töltsd le a programot, és a saját gépeden futtasd – lásd [Kipróbálás a saját adataiddal](#kipróbálás-a-saját-adataiddal).
+>
+> 🇬🇧 **English:** the dashboard and the PowerPoint/PDF report are also available in English – switch in the sidebar, or open the demo directly in English: https://minosegugyi-dashboard.streamlit.app/?lang=en
+
+**Nyelv:** az oldalsáv tetején választható **magyar** vagy **angol** felület. A beszámoló (PowerPoint / PDF) is a választott nyelven készül. A próbaadat kategóriái és a státuszok angolra fordítva látszanak; a valós Excel tartalmát (vevőnevek, hibaleírások) a program nem fordítja. Nyelvváltáskor a szűrők törlődnek.
 
 ## Mit csinál?
 
@@ -181,6 +185,7 @@ A böngészőben megnyílik a `http://localhost:8501` cím. Leállítás: a term
 | `valos_adat.py` | A valós Excel beolvasása és oszlop-megfeleltetése. |
 | `szamitasok.py` | Közös számítások (trend, Pareto, p-kártya, ismétlődések) – a képernyő és a beszámoló is ezt használja. |
 | `beszamolo.py` | A PowerPoint- és PDF-beszámoló elkészítése. |
+| `forditas.py` | Magyar / angol nyelv: szám- és pénzformátum, a próbaadat és a státuszok fordítása. |
 | `minta_keszit.py` | Elkészíti a `minta/` kitöltési mintát (kitalált adattal). |
 | `minta/` | Kitöltési minta: `NMF_minta.xlsx` és `gyartott_mennyiseg.csv`. |
 | `github_csomag.py` | Feltöltésre kész mappát készít (`github_csomag/`), valós adat nélkül. |

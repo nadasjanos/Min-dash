@@ -24,8 +24,9 @@ def havi_osszesites(df: pd.DataFrame) -> pd.DataFrame:
 
 
 def pareto_adat(df: pd.DataFrame, bontas: str, mertek: str = "Darabszám",
-                max_oszlop: int = 15) -> pd.Series:
-    """Pareto-sorrend (csökkenő). 15-nél több kategóriánál a többi 'Egyéb'-be kerül."""
+                max_oszlop: int = 15, en: bool = False) -> pd.Series:
+    """Pareto-sorrend (csökkenő). 15-nél több kategóriánál a többi 'Egyéb'-be kerül.
+    mertek: "Darabszám" vagy "Költség"; en=True: angol felirat ("Other")."""
     if mertek == "Darabszám":
         adat = df[bontas].value_counts()
     else:
@@ -34,7 +35,7 @@ def pareto_adat(df: pd.DataFrame, bontas: str, mertek: str = "Darabszám",
         egyeb = adat.iloc[max_oszlop:].sum()
         tobbi = len(adat) - max_oszlop
         adat = adat.iloc[:max_oszlop].copy()
-        adat[f"Egyéb ({tobbi} db)"] = egyeb
+        adat[f"Other ({tobbi})" if en else f"Egyéb ({tobbi} db)"] = egyeb
     return adat
 
 

@@ -17,7 +17,7 @@ CEL = MAPPA / "github_csomag"
 
 # Engedélyezett fájlok – csak ezek kerülnek a csomagba (minden más kimarad)
 FAJLOK = [
-    "app.py", "szamitasok.py", "valos_adat.py", "beszamolo.py",
+    "app.py", "szamitasok.py", "valos_adat.py", "beszamolo.py", "forditas.py",
     "generate_data.py", "minta_keszit.py", "github_csomag.py",
     "inditas.bat", "requirements.txt", ".gitignore",
     "README.md", "LEIRAS.md",

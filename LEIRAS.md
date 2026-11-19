@@ -15,7 +15,9 @@ A nemmegfelelőségi (NMF) nyilvántartás Excel-táblájából grafikonokat és
 - mely cikkek és munkaszámok kerülnek be újra és újra.
 
 A program **csak a saját gépen fut**, semmilyen adatot nem küld ki az internetre.
-Online bemutató (csak kitalált adattal): https://minosegugyi-dashboard.streamlit.app
+Online bemutató (csak kitalált adattal): https://minosegugyi-dashboard.streamlit.app (angolul: `?lang=en` a cím végén)
+
+**Nyelv:** az oldalsáv tetején **Magyar / English**. A beszámoló is a választott nyelven készül. Nyelvváltáskor a szűrők törlődnek.
 
 ## Indítás
 
