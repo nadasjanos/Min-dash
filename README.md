@@ -10,7 +10,7 @@ Egyszerű, a saját gépeden futó webes felület a nemmegfelelőségek elemzés
 > 🌐 **Kipróbálás telepítés nélkül (kitalált adatokkal):** https://minosegugyi-dashboard.streamlit.app
 > A saját adataiddal töltsd le a programot, és a saját gépeden futtasd – lásd [Kipróbálás a saját adataiddal](#kipróbálás-a-saját-adataiddal).
 >
-> 🇬🇧 **English:** the dashboard and the PowerPoint/PDF report are also available in English – switch in the sidebar, or open the demo directly in English: https://minosegugyi-dashboard.streamlit.app/?lang=en
+> 🇬🇧 **English:** [README_EN.md](README_EN.md) · English demo: https://minosegugyi-dashboard.streamlit.app/?lang=en
 
 **Nyelv:** az oldalsáv tetején választható **magyar** vagy **angol** felület. A beszámoló (PowerPoint / PDF) is a választott nyelven készül. A próbaadat kategóriái és a státuszok angolra fordítva látszanak; a valós Excel tartalmát (vevőnevek, hibaleírások) a program nem fordítja. Nyelvváltáskor a szűrők törlődnek.
 
@@ -189,6 +189,7 @@ A böngészőben megnyílik a `http://localhost:8501` cím. Leállítás: a term
 | `minta_keszit.py` | Elkészíti a `minta/` kitöltési mintát (kitalált adattal). |
 | `minta/` | Kitöltési minta: `NMF_minta.xlsx` és `gyartott_mennyiseg.csv`. |
 | `github_csomag.py` | Feltöltésre kész mappát készít (`github_csomag/`), valós adat nélkül. |
+| `README_EN.md` | Ez a leírás angolul. |
 | `requirements.txt` | A szükséges Python-csomagok. |
 | `.streamlit/config.toml` | Streamlit-beállítások (nincs statisztika-küldés). |
 | `.gitignore` | Amit a Git soha ne vegyen fel (valós adat, AI-napló). |

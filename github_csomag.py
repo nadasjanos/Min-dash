@@ -20,7 +20,7 @@ FAJLOK = [
     "app.py", "szamitasok.py", "valos_adat.py", "beszamolo.py", "forditas.py",
     "generate_data.py", "minta_keszit.py", "github_csomag.py",
     "inditas.bat", "requirements.txt", ".gitignore",
-    "README.md", "LEIRAS.md",
+    "README.md", "README_EN.md", "LEIRAS.md",
     ".streamlit/config.toml",
     "data/synthetic/nemmegfelelosegek.csv", "data/synthetic/gyartott_mennyiseg.csv",
     "minta/NMF_minta.xlsx", "minta/gyartott_mennyiseg.csv",
